@@ -9,14 +9,16 @@
       </div>
     </div>
     <div v-if="isActive" class="dropdown-option">
-      <ul v-for="province in provinces" :key="province.id">
-        <li @click="() => setSelected(province.name)">{{ province.name }}</li>
+      <ul>
+        <li v-for="province in provinces" :key="province.id" 
+        @click="() => setSelected(province.name)">{{ province.name }}</li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import Const from "../const";
 export default {
   data() {
     return {
@@ -26,12 +28,11 @@ export default {
     };
   },
   mounted() {
-    fetch(
-      "https://thawing-sierra-93972.herokuapp.com/https://klinikpintar.id/api/provinces"
-    )
+    fetch(Const.API_URL + "provinces")
       .then((res) => res.json())
       .then((data) => {
         this.provinces = data;
+        console.log("API called");
       });
   },
   methods: {
@@ -84,8 +85,8 @@ export default {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0.2em 0.5em 0.8em rgba(0, 0, 0, 0.03);
-    width: 225px;
-    height: 230px;
+    width: 248px;
+    height: 220px;
     overflow: auto;
 
     ul {
@@ -97,7 +98,7 @@ export default {
     li {
       font-size: 10.5pt;
       text-align: left;
-      padding: 0.5rem 0.75rem;
+      padding: 0.6rem 0.75rem;
       cursor: context-menu;
     }
 

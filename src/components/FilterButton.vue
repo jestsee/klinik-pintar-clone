@@ -1,31 +1,18 @@
 <template>
-  <div class="filter-button-container">
-    <button class="filter-button" @click="buttonClicked">
-      <span class="icon">
+    <button class="filter-button" @click="buttonHandler">
+      <span v-if="icon" class="icon">
         <font-awesome-icon icon="fa-solid fa-arrow-right-arrow-left" />
       </span>
-      Semua Filter
+      {{name}}
     </button>
-    <div class="divider"></div>
-  </div>
-  <FilterOption v-if="showModal"/>
 </template>
 
 <script>
-import FilterOption from './FilterOption.vue';
 export default {
-  components: {
-    FilterOption,
-  },
-  data() {
-    return {
-      showModal: false,
-    }
-  },
-  methods: {
-    buttonClicked() {
-      this.showModal = !this.showModal
-    }
+  props: {
+    buttonHandler: Function,
+    name: String,
+    icon: Boolean,
   }
 };
 </script>
@@ -41,7 +28,7 @@ export default {
   color: #fff;
   background-color: $primary-blue;
   border: none;
-  padding: 0.8rem 1.7rem;
+  padding: 0.7rem 1.7rem;
   font-size: 12pt;
   font-weight: bolder;
   border-radius: 4px;
@@ -58,9 +45,5 @@ export default {
 
 .filter-button-container {
   text-align: right;
-}
-
-.divider {
-  border-bottom: 1px solid gainsboro;
 }
 </style>

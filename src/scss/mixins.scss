@@ -8,3 +8,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+@mixin button-effect {
+  outline: 3.5px solid rgba(30, 175, 225, 0.5);
+}

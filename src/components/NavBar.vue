@@ -16,7 +16,7 @@
               Kemitraan Klinik
             </a>
           </li>
-          <button>Direktori Klinik</button>
+          <button @click="reloadPage">Direktori Klinik</button>
         </ul>
       </nav>
     </header>
@@ -24,7 +24,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    reloadPage() {
+      window.location.reload();
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -75,6 +81,11 @@ header {
     border: $primary-blue solid 1.5px;
     border-radius: 5px;
     height: fit-content;
+    cursor: pointer;
+  }
+
+  button:active {
+    @include button-effect;
   }
 }
 </style>

@@ -2,7 +2,7 @@
   <NavBar />
   <BannerProv />
   <FilterOption
-    v-if="showFilter"
+    :show="showFilter"
     :close="() => showFilterHandler(false)"
     :services="services"
   />
@@ -13,6 +13,7 @@
       :icon="true"
     />
   </ContentContainer>
+  <ContentContainer2/>
 </template>
 
 <script>
@@ -22,6 +23,7 @@ import FilterOption from "./components/SideBar.vue";
 import Const from "./const";
 import ContentContainer from "./components/ContentContainer.vue";
 import FilterButton from "./components/FilterButton.vue";
+import ContentContainer2 from './components/ContentContainer2.vue';
 
 export default {
   name: "App",
@@ -31,6 +33,7 @@ export default {
     FilterOption,
     ContentContainer,
     FilterButton,
+    ContentContainer2,
   },
   data() {
     return {
@@ -44,6 +47,9 @@ export default {
       .then((data) => {
         this.services = data;
         console.log("API called");
+
+        // show filter dialogue
+        this.showFilterHandler(true);
       });
   },
   methods: {

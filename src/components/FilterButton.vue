@@ -40,7 +40,7 @@ export default {
 }
 
 .filter-button:active {
-  outline: 3.5px solid rgba(30, 175, 225, 0.5);
+  @include button-effect;
 }
 
 .filter-button-container {

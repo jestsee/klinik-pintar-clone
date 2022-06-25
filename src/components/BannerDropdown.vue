@@ -2,7 +2,9 @@
   <div class="dropdown">
     <div class="dropdown-container" @click="dropdownClicked" tabindex="1">
       <div class="dropdown-item">
-        <span class="current-selected"> Pilih Provinsi </span>
+        <span class="current-selected">
+          {{ selectedProvince === "" ? "Pilih Provinsi" : selectedProvince }}
+        </span>
         <span class="icon">
           <font-awesome-icon icon="fa-solid fa-chevron-down" />
         </span>
@@ -10,8 +12,14 @@
     </div>
     <div v-if="isActive" class="dropdown-option">
       <ul>
-        <li v-for="province in provinces" :key="province.id" 
-        @click="() => setSelected(province.name)">{{ province.name }}</li>
+        <li
+          v-for="province in provinces"
+          :key="province.id"
+          v-bind:class="selectedProvince == province.name ? 'selected' : ''"
+          @click="() => setProvince(province.name, province.id)"
+        >
+          {{ province.name }}
+        </li>
       </ul>
     </div>
   </div>
@@ -24,6 +32,7 @@ export default {
     return {
       isActive: false,
       provinces: [],
+      selectedProvince: "",
     };
   },
   mounted() {
@@ -38,10 +47,14 @@ export default {
     dropdownClicked() {
       this.isActive = !this.isActive;
     },
-    setSelected(name) {
-      this.selected = name;
-      console.log(name);
+    setProvince(name, id) {
+      this.selectedProvince = name;
+      this.dropdownClicked();
+      this.getProvinceId(id);
     },
+  },
+  props: {
+    getProvinceId: Function,
   },
 };
 </script>
@@ -106,5 +119,8 @@ export default {
       color: #fff;
     }
   }
+}
+.selected {
+  font-weight: 700;
 }
 </style>

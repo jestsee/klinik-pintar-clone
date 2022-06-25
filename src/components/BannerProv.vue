@@ -2,7 +2,7 @@
   <div class="banner-province">
     <div class="item">
       <h3 class="label-province">Lihat Klinik di</h3>
-      <BannerDropdown />
+      <BannerDropdown :getProvinceId="getProvinceId"/>
     </div>
   </div>
 </template>
@@ -11,6 +11,9 @@
 import BannerDropdown from "./BannerDropdown.vue";
 export default {
   components: { BannerDropdown },
+  props: {
+    getProvinceId: Function,
+  }
 };
 </script>
 

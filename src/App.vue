@@ -1,6 +1,6 @@
 <template>
   <NavBar />
-  <BannerProv />
+  <BannerProv :getProvinceId="setProvinceId"/>
   <FilterOption
     :show="showFilter"
     :close="() => showFilterHandler(false)"
@@ -46,7 +46,7 @@ export default {
       showFilter: false,
       services: [],
       clinics: [],
-      selectedProvince: null,
+      selectedProvinceId: '',
     };
   },
   mounted() {
@@ -64,6 +64,18 @@ export default {
     showFilterHandler(set) {
       this.showFilter = set;
     },
+    setProvinceId(id) {
+      this.selectedProvinceId = id;
+      console.log(id);
+    }
+  },
+  watch: {
+    selectedProvinceId: function (val) {
+      fetch(Const.API_URL + "clinics?provinceId=" + val)
+      .then(resp => resp.json())
+      .then(data => (this.clinics = data));
+      console.log(this.clinics);
+    }
   },
 };
 </script>

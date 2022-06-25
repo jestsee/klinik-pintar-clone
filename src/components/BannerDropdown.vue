@@ -1,20 +1,111 @@
 <template>
-  <div class="container">
-    <h3>Pilih Provinsi</h3>
+  <div class="dropdown">
+    <div class="dropdown-container" @click="dropdownClicked" tabindex="1">
+      <div class="dropdown-item">
+        <span class="current-selected"> Pilih Provinsi </span>
+        <span class="icon">
+          <font-awesome-icon icon="fa-solid fa-chevron-down" />
+        </span>
+      </div>
+    </div>
+    <div v-if="isActive" class="dropdown-option">
+      <ul v-for="province in provinces" :key="province.id">
+        <li @click="() => setSelected(province.name)">{{ province.name }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isActive: false,
+      provinces: [],
+      selected: null,
+    };
+  },
+  mounted() {
+    fetch(
+      "https://thawing-sierra-93972.herokuapp.com/https://klinikpintar.id/api/provinces"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        this.provinces = data;
+        console.log(this.provinces[0]);
+      });
+  },
+  methods: {
+    dropdownClicked() {
+      this.isActive = !this.isActive;
+    },
+    setSelected(name) {
+      this.selected = name;
+      console.log(name);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 @import "../scss/mixins.scss";
 @import "../scss/variables.scss";
-.container {
-  padding: 0 1rem;
-  height: 10px;
-  background: rgba(30, 175, 225, 0.18);
+.dropdown-container {
+  padding: 0.3rem 0.7rem 0.3rem 1rem;
+  background: rgba(30, 175, 225, 0.1);
   color: $primary-blue;
+  position: relative;
+  height: auto;
+  border-radius: 24px;
+  cursor: context-menu;
+
+  .current-selected {
+    font-weight: 600;
+  }
+
+  .icon {
+    font-size: 12pt;
+    position: relative;
+    padding-left: 0.5rem;
+    vertical-align: middle;
+    top: 0;
+  }
+}
+
+.dropdown-container:focus {
+  outline: 3px solid $primary-blue;
+}
+
+.dropdown {
+  margin: auto auto auto 0.5rem;
+
+  .dropdown-option {
+    position: absolute;
+    margin-top: 0.25rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0.2em 0.5em 0.8em rgba(0, 0, 0, 0.03);
+    width: 225px;
+    height: 230px;
+    overflow: auto;
+
+    ul {
+      padding: 0;
+      list-style: none;
+      margin: 0.3rem 0;
+    }
+
+    li {
+      font-size: 10.5pt;
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      cursor: context-menu;
+    }
+
+    li:hover {
+      background: $primary-blue;
+      color: #fff;
+    }
+  }
 }
 </style>

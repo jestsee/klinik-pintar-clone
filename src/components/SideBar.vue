@@ -18,10 +18,7 @@
       <div class="payments-container">
         <h6>Pilih Pembayaran</h6>
         <div class="payment-options">
-          <button class="payment">Traveloka</button>
-          <button class="payment">Ticket.com to do</button>
-          <button class="payment">Klook</button>
-          <button class="payment">JD.ID</button>
+          <button v-for="(payment, index) in payments" :key="index" class="payment">{{payment.name}}</button>
         </div>
       </div>
       <div class="buttons-container-1">
@@ -42,6 +39,12 @@ export default {
   data() {
     return {
       showModal: false,
+      payments: [
+        {name: 'Traveloka'},
+        {name: 'Ticket.com to do'},
+        {name: 'Klook'},
+        {name: 'JD.ID'},
+      ]
     };
   },
   props: {

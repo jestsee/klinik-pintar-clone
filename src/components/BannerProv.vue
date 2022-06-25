@@ -24,8 +24,8 @@ export default {
   justify-content: center;
   align-items: center;
   height: 200px;
-  width: 100vw;
-  margin: auto -8px;
+  width: 100%;
+  margin: 0;
   
   .label-province {
     color: $dark-blue;

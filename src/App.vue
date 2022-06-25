@@ -7,13 +7,16 @@
     :services="services"
   />
   <ContentContainer>
-    <FilterButton
-      :buttonHandler="() => showFilterHandler(true)"
-      :name="'Semua Filter'"
-      :icon="true"
-    />
+    <div class="filter-button-container">
+      <FilterButton
+        :buttonHandler="() => showFilterHandler(true)"
+        :name="'Semua Filter'"
+        :icon="true"
+      />
+    </div>
+    <div class="divider"></div>
+    <GuideContainer/>
   </ContentContainer>
-  <ContentContainer2/>
 </template>
 
 <script>
@@ -23,7 +26,7 @@ import FilterOption from "./components/SideBar.vue";
 import Const from "./const";
 import ContentContainer from "./components/ContentContainer.vue";
 import FilterButton from "./components/FilterButton.vue";
-import ContentContainer2 from './components/ContentContainer2.vue';
+import GuideContainer from "./components/GuideContainer.vue";
 
 export default {
   name: "App",
@@ -33,8 +36,8 @@ export default {
     FilterOption,
     ContentContainer,
     FilterButton,
-    ContentContainer2,
-  },
+    GuideContainer
+},
   data() {
     return {
       showFilter: false,
@@ -66,5 +69,13 @@ export default {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   margin-top: 4.5rem;
+}
+
+.filter-button-container {
+  text-align: right;
+}
+
+.divider {
+  border-bottom: 1px solid gainsboro;
 }
 </style>

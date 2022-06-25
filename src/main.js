@@ -14,9 +14,22 @@ import {
   faChevronDown,
   faArrowRightArrowLeft,
   faXmark,
+  faCheck,
+  faLocationDot,
+  faPhone,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faChevronDown, faUserSecret, faArrowRightArrowLeft, faXmark);
+library.add(
+  faChevronDown,
+  faUserSecret,
+  faArrowRightArrowLeft,
+  faXmark,
+  faCheck,
+  faLocationDot,
+  faPhone,
+  faClock,
+);
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");

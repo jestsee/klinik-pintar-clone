@@ -22,13 +22,11 @@ export default {
 @import "../scss/variables.scss";
 
 .filter-button {
-  margin-top: 1.8rem;
-  margin-bottom: 2.2rem;
   position: relative;
   color: #fff;
   background-color: $primary-blue;
   border: none;
-  padding: 0.7rem 1.7rem;
+  padding: 0.7rem 1.6rem;
   font-size: 12pt;
   font-weight: bolder;
   border-radius: 4px;

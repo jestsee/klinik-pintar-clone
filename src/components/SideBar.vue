@@ -25,16 +25,15 @@
         <!-- TODO button handler -->
         <FilterButton :name="'Terapkan Filter'" :icon="true" />
       </div>
-      <div class="buttons-container-2">
-        <!-- TODO button handler -->
-        <button>Hapus Filter</button>
-      </div>
+      <!-- TODO button handler -->
+      <UnderlinedButton :orange="true" :name="'Hapus Filter'"/>
     </div>
   </div>
 </template>
 
 <script>
 import FilterButton from "./FilterButton.vue";
+import UnderlinedButton from "./UnderlinedButton.vue";
 export default {
   data() {
     return {
@@ -52,7 +51,7 @@ export default {
     close: Function,
     services: Array,
   },
-  components: { FilterButton },
+  components: { FilterButton, UnderlinedButton },
 };
 </script>
 
@@ -120,23 +119,11 @@ export default {
 
 .service:hover,
 .payment:hover {
-  background: rgba(0, 0, 0, 0.01);
+  background: rgba(0, 0, 0, 0.02);
 }
 
 .buttons-container-1 {
-  margin-top: 2rem;
-}
-
-$color: rgb(255, 149, 0);
-
-.buttons-container-2 button {
-  border: none;
-  background: none;
-  padding: 0;
-  border-bottom: 2px solid $color;
-  color: $color;
-  font-size: 12pt;
-  font-weight: 700;
-  top: -20px;
+  margin-top: 3.25rem;
+  margin-bottom: 1.8rem;
 }
 </style>

@@ -16,6 +16,7 @@
     </div>
     <div class="divider"></div>
     <GuideContainer/>
+    <ClinicContainer/>
   </ContentContainer>
 </template>
 
@@ -27,6 +28,7 @@ import Const from "./const";
 import ContentContainer from "./components/ContentContainer.vue";
 import FilterButton from "./components/FilterButton.vue";
 import GuideContainer from "./components/GuideContainer.vue";
+import ClinicContainer from "./components/ClinicContainer.vue";
 
 export default {
   name: "App",
@@ -36,7 +38,8 @@ export default {
     FilterOption,
     ContentContainer,
     FilterButton,
-    GuideContainer
+    GuideContainer,
+    ClinicContainer
 },
   data() {
     return {
@@ -73,6 +76,8 @@ export default {
 
 .filter-button-container {
   text-align: right;
+  margin-top: 1.8rem;
+  margin-bottom: 2.2rem;
 }
 
 .divider {

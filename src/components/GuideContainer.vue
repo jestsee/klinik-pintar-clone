@@ -1,6 +1,14 @@
 <template>
   <div class="content">
-    <SubTitle :text="'Perlu Diketahui'" />
+    <div class="subtitle-container">
+      <SubTitle :text="'Perlu Diketahui'" />
+      <div>
+        <UnderlinedButton
+          :name="'Lihat Semua'"
+          :href="'https://klinikpintar.id/blog'"
+        />
+      </div>
+    </div>
     <div class="image">
       <a v-for="(img, index) in images" :key="index" v-bind:href="img.href">
         <img v-bind:src="img.url" v-bind:alt="img.alt" />
@@ -11,6 +19,7 @@
 
 <script>
 import SubTitle from "./SubTitle.vue";
+import UnderlinedButton from "./UnderlinedButton.vue";
 export default {
   data() {
     return {
@@ -38,7 +47,7 @@ export default {
       ],
     };
   },
-  components: { SubTitle },
+  components: { SubTitle, UnderlinedButton },
 };
 </script>
 
@@ -55,6 +64,15 @@ export default {
     border-radius: 5px;
     max-height: 9rem;
     max-width: 16rem;
+  }
+}
+
+.subtitle-container {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    margin: auto 0 1.25rem 0;
   }
 }
 </style>

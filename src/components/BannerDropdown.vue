@@ -32,7 +32,6 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         this.provinces = data;
-        console.log(this.provinces[0]);
       });
   },
   methods: {

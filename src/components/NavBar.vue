@@ -52,7 +52,7 @@ header {
   z-index: 1;
 
   header {
-    padding: 0 5rem;
+    padding: $pad;
   }
 
   li {

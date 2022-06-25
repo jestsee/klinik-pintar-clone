@@ -2,29 +2,34 @@
   <NavBar/>
   <BannerProv/>
   <div class="content">
+    <FilterButton/>
   </div>
 </template>
 
 <script>
 import BannerProv from './components/BannerProv.vue';
 import NavBar from './components/NavBar.vue';
+import FilterButton from './components/FilterButton.vue';
 
 export default {
   name: 'App',
   components: {
     NavBar,
-    BannerProv
-  }
+    BannerProv,
+    FilterButton
+}
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "./scss/mixins.scss";
+@import "./scss/variables.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 4.5rem;
+}
+
+.content {
+  padding: $pad;
 }
 </style>

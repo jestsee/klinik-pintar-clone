@@ -22,7 +22,6 @@ export default {
 @import "../scss/variables.scss";
 
 .filter-button {
-  position: relative;
   color: #fff;
   background-color: $primary-blue;
   border: none;

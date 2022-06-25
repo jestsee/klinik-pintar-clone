@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="clinic-button">
-      <FilterButton :name="'Buat Janji'" />
+      <FilterButton class="button" :name="'Buat Janji'"/>
     </div>
   </div>
 </template>
@@ -107,9 +107,10 @@ export default {
       padding-top: 0.8rem;
     }
   }
-  .clinic-button {
-    margin-bottom: 0;
-    bottom: 0;
-  }
+}
+.clinic-button {
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
 }
 </style>

@@ -77,7 +77,7 @@ export default {
 .filter-button-container {
   text-align: right;
   margin-top: 1.8rem;
-  margin-bottom: 2.2rem;
+  margin-bottom: 2.4rem;
 }
 
 .divider {

@@ -46,6 +46,7 @@ export default {
       showFilter: false,
       services: [],
       clinics: [],
+      selectedProvince: null,
     };
   },
   mounted() {

@@ -1,10 +1,11 @@
 <template>
   <div class="clinic-item">
     <div class="clinic-image">
-      <img
-        v-bind:src="pictures[0]"
+      <!-- <img
+        v-bind:src="pictures[1]"
         alt=""
-      />
+      /> -->
+      <ClinicSlider :imgs="pictures"/>
     </div>
     <div class="clinic-info">
       <h3>{{ name }}</h3>
@@ -51,13 +52,15 @@ import ClinicFacilityItem from "./ClinicFacilityItem.vue";
 import ClinicAddressPhone from "./ClinicAddressPhone.vue";
 import UnderlinedButton from "./UnderlinedButton.vue";
 import FilterButton from "./FilterButton.vue";
+import ClinicSlider from "./ClinicSlider.vue";
 export default {
   components: {
     ClinicFacilityItem,
     ClinicAddressPhone,
     UnderlinedButton,
     FilterButton,
-  },
+    ClinicSlider
+},
   data() {
     return {
       toggleDay: false,

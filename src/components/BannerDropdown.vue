@@ -24,7 +24,6 @@ export default {
     return {
       isActive: false,
       provinces: [],
-      selected: null,
     };
   },
   mounted() {

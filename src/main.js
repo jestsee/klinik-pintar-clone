@@ -18,6 +18,8 @@ import {
   faLocationDot,
   faPhone,
   faClock,
+  faArrowLeft,
+  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -30,6 +32,8 @@ library.add(
   faLocationDot,
   faPhone,
   faClock,
+  faArrowLeft,
+  faArrowRight,
 );
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");

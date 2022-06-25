@@ -2,22 +2,30 @@
   <div class="clinic-item">
     <div class="clinic-image">
       <img
-        src="https://medigo-images.s3-ap-southeast-1.amazonaws.com/clinics/permata-bunda/pb-2.png"
+        v-bind:src="pictures[0]"
         alt=""
       />
     </div>
     <div class="clinic-info">
-      <h3>Klinik Pintar Permata Bunda</h3>
+      <h3>{{ name }}</h3>
       <div class="facility-container">
-        <ClinicFacilityItem :text="'Tes Rapid Antigen'" />
-        <ClinicFacilityItem :text="'Tes Rapid Antibodi'" />
+        <ClinicFacilityItem
+          v-for="item in services"
+          :key="item.id"
+          v-bind:text="item.name"
+        />
       </div>
       <ClinicAddressPhone
         class="address-phone"
         :isAddress="true"
-        :text="'Jl. Rw. Indah No.2, RT.005/RW.009, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113'"
+        v-bind:text="address"
+        :href="gmaps"
       />
-      <ClinicAddressPhone :text="'62811944328'" class="address-phone" />
+      <ClinicAddressPhone
+        v-bind:text="phone"
+        class="address-phone"
+        :href="wa"
+      />
       <div class="schedule-container">
         <div class="schedule-label" @click="setToggleDay">
           <span><font-awesome-icon icon="fa-solid fa-clock" /></span>
@@ -25,15 +33,15 @@
           <UnderlinedButton v-else :name="'Sembunyikan'" />
         </div>
         <div v-if="toggleDay" class="schedule-info">
-          <div class="day">
-            <p>Senin</p>
-            <p>08.00 - 20.00</p>
+          <div v-for="item in openHours" :key="item.id" class="day">
+            <p>{{ numberToDay(item.day) }}</p>
+            <p>{{ item.time.open }} - {{ item.time.closed }}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="clinic-button">
-      <FilterButton class="button" :name="'Buat Janji'"/>
+      <FilterButton class="button" :name="'Buat Janji'" />
     </div>
   </div>
 </template>
@@ -59,6 +67,37 @@ export default {
     setToggleDay() {
       this.toggleDay = !this.toggleDay;
     },
+    numberToDay(n) {
+      switch (n) {
+        case 1:
+          return "Senin";
+        case 2:
+          return "Selasa";
+        case 3:
+          return "Rabu";
+        case 4:
+          return "Kamis";
+        case 5:
+          return "Jumat";
+        case 6:
+          return "Sabtu";
+        case 7:
+          return "Minggu";
+
+        default:
+          return "Unknown";
+      }
+    },
+  },
+  props: {
+    pictures: Array,
+    name: String,
+    services: Array,
+    address: String,
+    gmaps: String,
+    phone: String,
+    wa: String,
+    openHours: Array,
   },
 };
 </script>
@@ -69,6 +108,7 @@ export default {
 .clinic-item {
   display: flex;
   padding: 1.25rem;
+  margin-bottom: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
@@ -78,15 +118,17 @@ export default {
 
   h3 {
     margin-top: 0.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 }
 .clinic-image img {
   width: 20rem;
+  height: 14.5rem;
+  object-fit: cover;
 }
 .facility-container {
   display: flex;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 .address-phone {
   margin-bottom: 1.5rem;

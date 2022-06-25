@@ -7,8 +7,8 @@
     <div class="text-container">
       <div class="text">
         {{ text }}
-        <UnderlinedButton v-if="isAddress" :name="'Lihat Peta'" />
-        <UnderlinedButton v-else :name="'Hubungi'" :green="true" />
+        <UnderlinedButton v-if="isAddress" :name="'Lihat Peta'" :href="href" />
+        <UnderlinedButton v-else :name="'Hubungi'" :green="true" :href="href" />
       </div>
     </div>
   </div>
@@ -21,6 +21,7 @@ export default {
   props: {
     isAddress: Boolean,
     text: String,
+    href: String,
   },
 };
 </script>

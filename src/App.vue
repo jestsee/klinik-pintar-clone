@@ -15,8 +15,8 @@
       />
     </div>
     <div class="divider"></div>
-    <GuideContainer/>
-    <ClinicContainer/>
+    <GuideContainer />
+    <ClinicContainer :totalClinics="clinics.total" :clinics="clinics.data" />
   </ContentContainer>
 </template>
 
@@ -39,24 +39,25 @@ export default {
     ContentContainer,
     FilterButton,
     GuideContainer,
-    ClinicContainer
-},
+    ClinicContainer,
+  },
   data() {
     return {
       showFilter: false,
       services: [],
+      clinics: [],
     };
   },
   mounted() {
-    fetch(Const.API_URL + "services")
-      .then((res) => res.json())
-      .then((data) => {
-        this.services = data;
-        console.log("API called");
-
-        // show filter dialogue
-        this.showFilterHandler(true);
-      });
+    Promise.all([
+      fetch(Const.API_URL + "services"),
+      fetch(Const.API_URL + "clinics"),
+    ]).then(async ([resServices, resClinics]) => {
+      this.services = await resServices.json();
+      this.clinics = await resClinics.json();
+      this.showFilterHandler(true);
+    });
+    // TODO catch error
   },
   methods: {
     showFilterHandler(set) {

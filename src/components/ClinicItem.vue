@@ -32,8 +32,10 @@
           </div>
           <div v-if="toggleDay" class="schedule-info">
             <div v-for="item in openHours" :key="item.id" class="day">
-              <p>{{ numberToDay(item.day) }}</p>
-              <p>{{ item.time.open }} - {{ item.time.closed }}</p>
+              <p class="d-day">{{ numberToDay(item.day) }}</p>
+              <p class="d-time">
+                {{ item.time.open }} - {{ item.time.closed }}
+              </p>
             </div>
           </div>
         </div>
@@ -147,10 +149,12 @@ export default {
     display: table-row;
     p {
       display: table-cell;
-      padding-right: 5rem;
       padding-top: 0.8rem;
     }
   }
+}
+.d-day {
+  padding-right: 5rem;
 }
 .clinic-button {
   display: flex;
@@ -181,6 +185,22 @@ export default {
   .clinic-info {
     margin-left: 0;
     margin-top: 1rem;
+  }
+}
+@media only screen and (min-width: 0) and (max-width: 480px) {
+  .facility-container {
+    display: block;
+  }
+  .facility-item {
+    margin-top: 0.3rem;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 800px) {
+  .facility-container {
+    display: block;
+  }
+  .facility-item {
+    margin-top: 0.3rem;
   }
 }
 </style>

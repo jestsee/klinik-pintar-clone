@@ -1,12 +1,14 @@
 <template>
   <header>
     <header>
-      <a href="/">
-        <img src="../assets/logo.svg" class="logo" alt="logo" />
-      </a>
-      <span @click="setBars" class="bars"
-        ><font-awesome-icon icon="fa-solid fa-bars"
-      /></span>
+      <div class="top-nav-bar">
+        <a href="/">
+          <img src="../assets/logo.svg" class="logo" alt="logo" />
+        </a>
+        <span @click="setBars" class="bars"
+          ><font-awesome-icon icon="fa-solid fa-bars"
+        /></span>
+      </div>
       <nav v-bind:class="!showBars ? 'nav-menu disable' : 'nav-menu'">
         <ul>
           <li class="nav-menu-item">
@@ -60,6 +62,10 @@ export default {
   }
 }
 
+.top-nav-bar {
+  display: flex;
+}
+
 @media only screen and (min-width: 1180px) {
   header {
     header {
@@ -79,19 +85,26 @@ export default {
     cursor: pointer;
   }
 
+  .top-nav-bar {
+    z-index: 3;
+    width: 100%;
+    justify-content: space-between;
+    background: #fff;
+  }
+
   .nav-menu {
     position: absolute;
     top: 4.55rem;
+    padding-top: 1rem;
     left: 0;
     background: #fff;
-    z-index: 0;
     width: 100%;
-    // transition: all 0.25s ease 0s;
+    transition: all 0.5s ease 0s;
   }
 
   .disable {
     top: -400%;
-    // transition: all 0.25s ease 0s;
+    transition: all 0.5s ease 0s;
   }
 
   ul {

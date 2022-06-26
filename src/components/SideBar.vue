@@ -42,7 +42,6 @@
         </div>
       </div>
       <div class="buttons-container-1">
-        <!-- TODO button handler -->
         <FilterButton
           :buttonHandler="close"
           v-bind:name="
@@ -54,12 +53,14 @@
           "
           :icon="true"
         />
+        <div class="button-2">
+          <UnderlinedButton
+            @click="resetFilter"
+            :orange="true"
+            :name="'Hapus Filter'"
+          />
+        </div>
       </div>
-      <UnderlinedButton
-        @click="resetFilter"
-        :orange="true"
-        :name="'Hapus Filter'"
-      />
     </div>
   </div>
 </template>
@@ -103,24 +104,54 @@ export default {
   z-index: 2;
   position: fixed;
 }
+@media only screen and (min-width: 1024px) {
+  .filter-container {
+    width: 31.3rem;
+  }
+}
+@media only screen and (max-width: 1023px) and (min-width: 400px) {
+  .filter-container {
+    width: 23rem;
+  }
 
+  .buttons-container-1 {
+    text-align: center;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  .filter-container {
+    width: 100%;
+  }
+
+  .buttons-container-1 {
+    text-align: center;
+
+    button {
+      width: 100%;
+    }
+  }
+}
 .filter-container {
-  padding: 1.5rem 1.6rem;
+  box-sizing:border-box; // make sure padding won't affect container size
+  padding: 1.5rem 2rem;
   z-index: 3;
   position: fixed;
   top: 0;
   right: -100%;
   transition: all 0.5s ease 0s;
-  width: 29rem;
+  // width: 20rem;
   height: 100%;
   background: #fff;
   overflow-y: auto;
-
-  h6 {
-    color: $dark-blue;
-    font-size: 13.5pt;
-    margin-bottom: 1.2rem;
-  }
+}
+h6 {
+  color: $dark-blue;
+  font-size: 13.5pt;
+  margin-bottom: 1.2rem;
 }
 
 .filter-container.active {
@@ -174,5 +205,9 @@ export default {
 .buttons-container-1 {
   margin-top: 3.25rem;
   margin-bottom: 1.8rem;
+}
+
+.button-2 {
+  margin-top: 1.6rem;
 }
 </style>

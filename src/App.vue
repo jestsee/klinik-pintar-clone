@@ -9,18 +9,23 @@
     :selectedServices="selectedServices"
     :servicesHandler="setServices"
     :paymentsHandler="setPayments"
+    :resetFilter="resetFilter"
   />
   <ContentContainer>
     <div class="filter-button-container">
       <FilterButton
         :buttonHandler="() => showFilterHandler(true)"
-        :name="'Semua Filter'"
+        :name="filterCounter"
         :icon="true"
       />
     </div>
     <div class="divider"></div>
     <GuideContainer />
     <ClinicContainer :totalClinics="clinics.total" :clinics="clinics.data" />
+    <ClinicPagination
+      :selectedPagination="selectedPagination"
+      :paginationHandler="setPagination"
+    />
   </ContentContainer>
 </template>
 
@@ -33,6 +38,7 @@ import ContentContainer from "./components/ContentContainer.vue";
 import FilterButton from "./components/FilterButton.vue";
 import GuideContainer from "./components/GuideContainer.vue";
 import ClinicContainer from "./components/ClinicContainer.vue";
+import ClinicPagination from "./components/ClinicPagination.vue";
 
 export default {
   name: "App",
@@ -44,6 +50,7 @@ export default {
     FilterButton,
     GuideContainer,
     ClinicContainer,
+    ClinicPagination,
   },
   data() {
     return {
@@ -54,6 +61,7 @@ export default {
       selectedProvinceId: "",
       selectedServices: [],
       selectedPayments: [],
+      selectedPagination: 5, // 5 by default
     };
   },
   mounted() {
@@ -92,6 +100,13 @@ export default {
       }
       console.log(this.selectedPayments);
     },
+    resetFilter() {
+      this.selectedServices = [];
+      this.selectedPayments = [];
+    },
+    setPagination(num) {
+      this.selectedPagination = num;
+    },
   },
   watch: {
     selectedProvinceId: function (val) {
@@ -104,31 +119,39 @@ export default {
       fetch(val)
         .then((resp) => resp.json())
         .then((data) => (this.clinics = data));
-      console.log(val);
-      console.log(this.clinics);
-    }
+    },
     // TODO watch urlnya nnti panggil newUrl
   },
   computed: {
     newUrl: function () {
-      var temp = this.clinicsUrl
+      var temp = this.clinicsUrl;
       if (this.selectedServices.length > 0) {
-        this.selectedServices.map((val)=>{
+        this.selectedServices.map((val) => {
           // replace white space with '+'
-          val = val.replaceAll(' ','+')
-          temp = temp + "services[]=" + val + '&';
-        })
+          val = val.replaceAll(" ", "+");
+          temp = temp + "services[]=" + val + "&";
+        });
       }
       if (this.selectedProvinceId !== "") {
-        temp = temp + "provinceId=" + this.selectedProvinceId + '&';
+        temp = temp + "provinceId=" + this.selectedProvinceId + "&";
       }
       if (this.selectedPayments.length > 0) {
-        this.selectedPayments.map((val)=>{
-          val = val.replaceAll(' ','+')
-          temp = temp + "guarantors[]=" + val + '&';
-        })
+        this.selectedPayments.map((val) => {
+          val = val.replaceAll(" ", "+");
+          temp = temp + "guarantors[]=" + val + "&";
+        });
       }
+      temp = temp + "limit=" + this.selectedPagination;
+      console.log(temp);
       return temp;
+    },
+    filterCounter: function () {
+      var sum = this.selectedServices.length + this.selectedPayments.length;
+      if (sum > 0) {
+        return sum + " Filter Aktif";
+      } else {
+        return "Semua Filter";
+      }
     },
   },
 };

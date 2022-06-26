@@ -20,6 +20,8 @@ import {
   faClock,
   faArrowLeft,
   faArrowRight,
+  faAngleLeft,
+  faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -34,6 +36,8 @@ library.add(
   faClock,
   faArrowLeft,
   faArrowRight,
+  faAngleLeft,
+  faAngleRight,
 );
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");

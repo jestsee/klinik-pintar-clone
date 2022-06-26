@@ -13,7 +13,7 @@
           <button
             v-for="service in services"
             :key="service.id"
-            @click="()=>servicesHandler(service.name)"
+            @click="() => servicesHandler(service.name)"
             v-bind:class="
               selectedServices.includes(service.name)
                 ? 'service selected'
@@ -30,7 +30,7 @@
           <button
             v-for="(payment, index) in payments"
             :key="index"
-            @click="()=>paymentsHandler(payment.name)"
+            @click="() => paymentsHandler(payment.name)"
             v-bind:class="
               selectedPayments.includes(payment.name)
                 ? 'payment selected'
@@ -43,10 +43,23 @@
       </div>
       <div class="buttons-container-1">
         <!-- TODO button handler -->
-        <FilterButton :name="'Terapkan Filter'" :icon="true" />
+        <FilterButton
+          :buttonHandler="close"
+          v-bind:name="
+            selectedPayments.length + selectedServices.length <= 0
+              ? 'Terapkan Filter'
+              : 'Terapkan ' +
+                (selectedPayments.length + selectedServices.length) +
+                ' Filter'
+          "
+          :icon="true"
+        />
       </div>
-      <!-- TODO button handler -->
-      <UnderlinedButton :orange="true" :name="'Hapus Filter'" />
+      <UnderlinedButton
+        @click="resetFilter"
+        :orange="true"
+        :name="'Hapus Filter'"
+      />
     </div>
   </div>
 </template>
@@ -74,6 +87,7 @@ export default {
     selectedPayments: Array,
     servicesHandler: Function,
     paymentsHandler: Function,
+    resetFilter: Function,
   },
   components: { FilterButton, UnderlinedButton },
 };
@@ -91,15 +105,16 @@ export default {
 }
 
 .filter-container {
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 1.6rem;
   z-index: 3;
   position: fixed;
   top: 0;
-  right: -40%;
+  right: -100%;
   transition: all 0.5s ease 0s;
-  width: 28rem;
+  width: 29rem;
   height: 100%;
   background: #fff;
+  overflow: auto;
 
   h6 {
     color: $dark-blue;

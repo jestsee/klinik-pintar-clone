@@ -4,7 +4,10 @@
       <a href="/">
         <img src="../assets/logo.svg" class="logo" alt="logo" />
       </a>
-      <nav class="nav-menu">
+      <span @click="setBars" class="bars"
+        ><font-awesome-icon icon="fa-solid fa-bars"
+      /></span>
+      <nav v-bind:class="!showBars ? 'nav-menu disable' : 'nav-menu'">
         <ul>
           <li class="nav-menu-item">
             <a href="https://klinikpintar.id/untuk-perusahaan">
@@ -16,7 +19,9 @@
               Kemitraan Klinik
             </a>
           </li>
-          <button @click="reloadPage">Direktori Klinik</button>
+          <div>
+            <button @click="reloadPage">Direktori Klinik</button>
+          </div>
         </ul>
       </nav>
     </header>
@@ -25,11 +30,19 @@
 
 <script>
 export default {
+  data() {
+    return {
+      showBars: false,
+    };
+  },
   methods: {
     reloadPage() {
       window.location.reload();
-    }
-  }
+    },
+    setBars() {
+      this.showBars = !this.showBars;
+    },
+  },
 };
 </script>
 
@@ -54,6 +67,45 @@ export default {
       width: 70rem;
       margin: 0 auto;
     }
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .bars {
+    display: block;
+    color: $dark-blue;
+    font-size: 16pt;
+    padding: 1.5rem 0;
+    cursor: pointer;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 4.55rem;
+    left: 0;
+    background: #fff;
+    z-index: 0;
+    width: 100%;
+    // transition: all 0.25s ease 0s;
+  }
+
+  .disable {
+    top: -400%;
+    // transition: all 0.25s ease 0s;
+  }
+
+  ul {
+    flex-direction: column;
+  }
+
+  li {
+    padding: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .bars {
+    display: none;
   }
 }
 

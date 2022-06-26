@@ -22,6 +22,7 @@ import {
   faArrowRight,
   faAngleLeft,
   faAngleRight,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -38,6 +39,7 @@ library.add(
   faArrowRight,
   faAngleLeft,
   faAngleRight,
+  faBars,
 );
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");

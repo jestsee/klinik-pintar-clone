@@ -1,10 +1,14 @@
 <template>
   <NavBar />
-  <BannerProv :getProvinceId="setProvinceId"/>
+  <BannerProv :getProvinceId="setProvinceId" />
   <FilterOption
     :show="showFilter"
     :close="() => showFilterHandler(false)"
     :services="services"
+    :selectedPayments="selectedPayments"
+    :selectedServices="selectedServices"
+    :servicesHandler="setServices"
+    :paymentsHandler="setPayments"
   />
   <ContentContainer>
     <div class="filter-button-container">
@@ -43,10 +47,13 @@ export default {
   },
   data() {
     return {
+      clinicsUrl: Const.API_URL + "clinics?",
       showFilter: false,
       services: [],
       clinics: [],
-      selectedProvinceId: '',
+      selectedProvinceId: "",
+      selectedServices: [],
+      selectedPayments: [],
     };
   },
   mounted() {
@@ -66,16 +73,63 @@ export default {
     },
     setProvinceId(id) {
       this.selectedProvinceId = id;
-      console.log(id);
-    }
+    },
+    setServices(service) {
+      var idx = this.selectedServices.indexOf(service);
+      if (idx === -1) {
+        this.selectedServices.push(service);
+      } else {
+        this.selectedServices.splice(idx, 1);
+      }
+      console.log(this.selectedServices);
+    },
+    setPayments(payment) {
+      var idx = this.selectedPayments.indexOf(payment);
+      if (idx === -1) {
+        this.selectedPayments.push(payment);
+      } else {
+        this.selectedPayments.splice(idx, 1);
+      }
+      console.log(this.selectedPayments);
+    },
   },
   watch: {
     selectedProvinceId: function (val) {
       fetch(Const.API_URL + "clinics?provinceId=" + val)
-      .then(resp => resp.json())
-      .then(data => (this.clinics = data));
+        .then((resp) => resp.json())
+        .then((data) => (this.clinics = data));
+      console.log(this.clinics);
+    },
+    newUrl(val) {
+      fetch(val)
+        .then((resp) => resp.json())
+        .then((data) => (this.clinics = data));
+      console.log(val);
       console.log(this.clinics);
     }
+    // TODO watch urlnya nnti panggil newUrl
+  },
+  computed: {
+    newUrl: function () {
+      var temp = this.clinicsUrl
+      if (this.selectedServices.length > 0) {
+        this.selectedServices.map((val)=>{
+          // replace white space with '+'
+          val = val.replaceAll(' ','+')
+          temp = temp + "services[]=" + val + '&';
+        })
+      }
+      if (this.selectedProvinceId !== "") {
+        temp = temp + "provinceId=" + this.selectedProvinceId + '&';
+      }
+      if (this.selectedPayments.length > 0) {
+        this.selectedPayments.map((val)=>{
+          val = val.replaceAll(' ','+')
+          temp = temp + "guarantors[]=" + val + '&';
+        })
+      }
+      return temp;
+    },
   },
 };
 </script>

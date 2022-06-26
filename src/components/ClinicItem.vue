@@ -1,10 +1,6 @@
 <template>
   <div class="clinic-item">
     <div class="clinic-image">
-      <!-- <img
-        v-bind:src="pictures[1]"
-        alt=""
-      /> -->
       <ClinicSlider :imgs="pictures"/>
     </div>
     <div class="clinic-info">

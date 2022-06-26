@@ -1,6 +1,6 @@
 <template>
-  <div v-bind:class="(show)?'overlay':''">
-    <div v-bind:class="(show)?'filter-container active':'filter-container'">
+  <div v-bind:class="show ? 'overlay' : ''">
+    <div v-bind:class="show ? 'filter-container active' : 'filter-container'">
       <div class="filter-title-container">
         <h2 class="filter-title">Cari Klinik</h2>
         <span class="icon" @click="close">
@@ -10,7 +10,16 @@
       <div class="services-containter">
         <h6>Pilih Layanan</h6>
         <div class="services-options">
-          <button v-for="service in services" :key="service.id" class="service">
+          <button
+            v-for="service in services"
+            :key="service.id"
+            @click="()=>servicesHandler(service.name)"
+            v-bind:class="
+              selectedServices.includes(service.name)
+                ? 'service selected'
+                : 'service'
+            "
+          >
             {{ service.name }}
           </button>
         </div>
@@ -18,7 +27,18 @@
       <div class="payments-container">
         <h6>Pilih Pembayaran</h6>
         <div class="payment-options">
-          <button v-for="(payment, index) in payments" :key="index" class="payment">{{payment.name}}</button>
+          <button
+            v-for="(payment, index) in payments"
+            :key="index"
+            @click="()=>paymentsHandler(payment.name)"
+            v-bind:class="
+              selectedPayments.includes(payment.name)
+                ? 'payment selected'
+                : 'payment'
+            "
+          >
+            {{ payment.name }}
+          </button>
         </div>
       </div>
       <div class="buttons-container-1">
@@ -26,7 +46,7 @@
         <FilterButton :name="'Terapkan Filter'" :icon="true" />
       </div>
       <!-- TODO button handler -->
-      <UnderlinedButton :orange="true" :name="'Hapus Filter'"/>
+      <UnderlinedButton :orange="true" :name="'Hapus Filter'" />
     </div>
   </div>
 </template>
@@ -39,17 +59,21 @@ export default {
     return {
       showModal: false,
       payments: [
-        {name: 'Traveloka'},
-        {name: 'Ticket.com to do'},
-        {name: 'Klook'},
-        {name: 'JD.ID'},
-      ]
+        { name: "Traveloka" },
+        { name: "Tiket.com to do" },
+        { name: "Klook" },
+        { name: "JD.ID" },
+      ],
     };
   },
   props: {
     show: Boolean,
     close: Function,
     services: Array,
+    selectedServices: Array,
+    selectedPayments: Array,
+    servicesHandler: Function,
+    paymentsHandler: Function,
   },
   components: { FilterButton, UnderlinedButton },
 };
@@ -61,7 +85,7 @@ export default {
 
 .overlay {
   inset: 0;
-  background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   z-index: 2;
   position: fixed;
 }
@@ -120,6 +144,16 @@ export default {
 .service:hover,
 .payment:hover {
   background: rgba(0, 0, 0, 0.02);
+}
+
+.selected {
+  background: rgba(30, 175, 225, 0.1);
+  color: $primary-blue;
+  font-weight: 700;
+}
+
+.selected:hover {
+  background: rgba(30, 175, 225, 0.1);
 }
 
 .buttons-container-1 {

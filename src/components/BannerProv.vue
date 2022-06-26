@@ -20,24 +20,49 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/mixins.scss";
 @import "../scss/variables.scss";
-.banner-province {
-  background: $light-gray;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  width: 100%;
-  margin: 0;
-  
-  .label-province {
-    color: $dark-blue;
-  }
-
-  .item {
+@media only screen and (min-width: 640px) {
+  .banner-province {
+    background: $light-gray;
+    position: relative;
     display: flex;
     justify-content: center;
-    font-size: 22pt;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    margin: 0;
+    
+    .label-province {
+      color: $dark-blue;
+    }
+  
+    .item {
+      display: flex;
+      justify-content: center;
+      font-size: 22pt;
+    }
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .banner-province {
+    background: $light-gray;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    margin: 0;
+    
+    .label-province {
+      color: $dark-blue;
+    }
+  
+    .item {
+      display: block;
+      justify-content: center;
+      font-size: 22pt;
+    }
   }
 }
 </style>

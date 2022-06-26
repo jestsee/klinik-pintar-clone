@@ -30,11 +30,16 @@
     </div>
     <div class="right">
       <div class="item">
-        1-5 dari 104
-        <span class="<"
+        {{ (selectedPage - 1) * selectedPagination + 1 }}-{{
+          selectedPage * selectedPagination < totalClinics
+            ? selectedPage * selectedPagination
+            : totalClinics
+        }}
+        dari {{ totalClinics }}
+        <span @click="prev" v-bind:class="classPrev"
           ><font-awesome-icon icon="fa-solid fa-angle-left"
         /></span>
-        <span class=">"
+        <span @click="next" v-bind:class="classNext"
           ><font-awesome-icon icon="fa-solid fa-angle-right"
         /></span>
       </div>
@@ -53,13 +58,44 @@ export default {
   props: {
     selectedPagination: Number,
     paginationHandler: Function,
+    selectedPage: Number,
+    pageHandler: Function,
+    totalClinics: Number,
   },
   methods: {
     handler(num) {
-      this.paginationHandler(num)
-      this.showIndex=false
-    }
-  }
+      this.paginationHandler(num);
+      this.showIndex = false;
+    },
+    next() {
+      if(this.canNext) {
+        this.pageHandler(this.selectedPage + 1);
+      } 
+    },
+    prev() {
+      if(this.canPrev) {
+        this.pageHandler(this.selectedPage - 1);
+      } 
+    },
+  },
+  computed: {
+    canPrev: function () {
+      return this.selectedPage > 1;
+    },
+    canNext: function () {
+      return this.selectedPage * this.selectedPagination < this.totalClinics;
+    },
+    classPrev: function () {
+      if (!this.canPrev) {
+        return 'disable'
+      } return ''
+    },
+    classNext: function () {
+      if (!this.canNext) {
+        return 'disable'
+      } return ''
+    },
+  },
 };
 </script>
 
@@ -95,6 +131,9 @@ export default {
   margin-left: 1rem;
   color: $primary-blue;
   cursor: pointer;
+}
+.right .disable {
+  color: lightgray;
 }
 .option-container {
   margin-top: 0.25rem;

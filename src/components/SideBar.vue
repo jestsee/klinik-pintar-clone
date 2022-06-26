@@ -114,7 +114,7 @@ export default {
   width: 29rem;
   height: 100%;
   background: #fff;
-  overflow: auto;
+  overflow-y: auto;
 
   h6 {
     color: $dark-blue;

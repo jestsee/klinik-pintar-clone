@@ -56,14 +56,15 @@ export default {
 @import "../scss/variables.scss";
 
 .image {
+  overflow-x: auto;
   display: flex;
-  justify-content: space-between;
   left: 0;
 
   img {
     border-radius: 5px;
     max-height: 9rem;
     max-width: 16rem;
+    margin-right: 1.5rem;
   }
 }
 

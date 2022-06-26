@@ -47,6 +47,16 @@ export default {
   }
 }
 
+@media only screen and (min-width: 1180px) {
+  header {
+    header {
+      // padding: $pad;
+      width: 70rem;
+      margin: 0 auto;
+    }
+  }
+}
+
 header {
   @include flex-between;
   position: fixed;
@@ -58,6 +68,8 @@ header {
   z-index: 1;
 
   header {
+    // width: 70rem;
+    margin: 0 auto;
     padding: $pad;
   }
 

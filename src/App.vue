@@ -25,6 +25,9 @@
     <ClinicPagination
       :selectedPagination="selectedPagination"
       :paginationHandler="setPagination"
+      :selectedPage="selectedPage"
+      :pageHandler="setPage"
+      :totalClinics="clinics.total"
     />
   </ContentContainer>
 </template>
@@ -57,11 +60,12 @@ export default {
       clinicsUrl: Const.API_URL + "clinics?",
       showFilter: false,
       services: [],
-      clinics: [],
+      clinics: {},
       selectedProvinceId: "",
       selectedServices: [],
       selectedPayments: [],
       selectedPagination: 5, // 5 by default
+      selectedPage: 1,
     };
   },
   mounted() {
@@ -107,20 +111,21 @@ export default {
     setPagination(num) {
       this.selectedPagination = num;
     },
+    setPage(num) {
+      this.selectedPage = num;
+    },
   },
   watch: {
-    selectedProvinceId: function (val) {
-      fetch(Const.API_URL + "clinics?provinceId=" + val)
-        .then((resp) => resp.json())
-        .then((data) => (this.clinics = data));
-      console.log(this.clinics);
-    },
     newUrl(val) {
       fetch(val)
         .then((resp) => resp.json())
         .then((data) => (this.clinics = data));
     },
-    // TODO watch urlnya nnti panggil newUrl
+    selectedProvinceId: function (val) {
+      console.log("provinsi berubah", val);
+      this.selectedPage = 1;
+      this.selectedPagination = 5;
+    },
   },
   computed: {
     newUrl: function () {
@@ -141,6 +146,7 @@ export default {
           temp = temp + "guarantors[]=" + val + "&";
         });
       }
+      temp = temp + "page=" + this.selectedPage + "&";
       temp = temp + "limit=" + this.selectedPagination;
       console.log(temp);
       return temp;

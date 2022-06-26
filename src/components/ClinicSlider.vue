@@ -109,4 +109,15 @@ img, .pic {
   background-color: $primary-blue;
   color: #fff;
 }
+
+@media only screen and (max-width: 767px) {
+  .clinic-item {
+    display: block;
+  }
+  img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+  }
+}
 </style>

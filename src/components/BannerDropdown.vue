@@ -99,7 +99,7 @@ export default {
     box-shadow: 0.2em 0.5em 0.8em rgba(0, 0, 0, 0.03);
     width: 248px;
     height: 220px;
-    overflow: auto;
+    overflow-y: auto;
 
     ul {
       padding: 0;

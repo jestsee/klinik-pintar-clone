@@ -1,44 +1,46 @@
 <template>
   <div class="clinic-item">
     <div class="clinic-image">
-      <ClinicSlider :imgs="pictures"/>
+      <ClinicSlider :imgs="pictures" />
     </div>
-    <div class="clinic-info">
-      <h3>{{ name }}</h3>
-      <div class="facility-container">
-        <ClinicFacilityItem
-          v-for="item in services"
-          :key="item.id"
-          v-bind:text="item.name"
-        />
-      </div>
-      <ClinicAddressPhone
-        class="address-phone"
-        :isAddress="true"
-        v-bind:text="address"
-        :href="gmaps"
-      />
-      <ClinicAddressPhone
-        v-bind:text="phone"
-        class="address-phone"
-        :href="wa"
-      />
-      <div class="schedule-container">
-        <div class="schedule-label" @click="setToggleDay">
-          <span><font-awesome-icon icon="fa-solid fa-clock" /></span>
-          <UnderlinedButton v-if="!toggleDay" :name="'Lihat Semua Hari'" />
-          <UnderlinedButton v-else :name="'Sembunyikan'" />
+    <div class="clinic-content">
+      <div class="clinic-info">
+        <h3>{{ name }}</h3>
+        <div class="facility-container">
+          <ClinicFacilityItem
+            v-for="item in services"
+            :key="item.id"
+            v-bind:text="item.name"
+          />
         </div>
-        <div v-if="toggleDay" class="schedule-info">
-          <div v-for="item in openHours" :key="item.id" class="day">
-            <p>{{ numberToDay(item.day) }}</p>
-            <p>{{ item.time.open }} - {{ item.time.closed }}</p>
+        <ClinicAddressPhone
+          class="address-phone"
+          :isAddress="true"
+          v-bind:text="address"
+          :href="gmaps"
+        />
+        <ClinicAddressPhone
+          v-bind:text="phone"
+          class="address-phone"
+          :href="wa"
+        />
+        <div class="schedule-container">
+          <div class="schedule-label" @click="setToggleDay">
+            <span><font-awesome-icon icon="fa-solid fa-clock" /></span>
+            <UnderlinedButton v-if="!toggleDay" :name="'Lihat Semua Hari'" />
+            <UnderlinedButton v-else :name="'Sembunyikan'" />
+          </div>
+          <div v-if="toggleDay" class="schedule-info">
+            <div v-for="item in openHours" :key="item.id" class="day">
+              <p>{{ numberToDay(item.day) }}</p>
+              <p>{{ item.time.open }} - {{ item.time.closed }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="clinic-button">
-      <FilterButton class="button" :name="'Buat Janji'" />
+      <div class="clinic-button">
+        <FilterButton class="button" :name="'Buat Janji'" />
+      </div>
     </div>
   </div>
 </template>
@@ -55,8 +57,8 @@ export default {
     ClinicAddressPhone,
     UnderlinedButton,
     FilterButton,
-    ClinicSlider
-},
+    ClinicSlider,
+  },
   data() {
     return {
       toggleDay: false,
@@ -114,6 +116,7 @@ export default {
 .clinic-info {
   margin-left: 1.25rem;
   width: 55%;
+  flex-grow: 1;
 
   h3 {
     margin-top: 0.25rem;
@@ -153,5 +156,31 @@ export default {
   display: flex;
   align-items: flex-end;
   justify-content: end;
+  margin-top: 1.25rem;
+}
+
+.clinic-content {
+  display: flex;
+  width: fit-content;
+}
+@media only screen and (max-width: 1160px) {
+  .clinic-content {
+    display: block;
+    width: fit-content;
+  }
+
+  .clinic-info {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .clinic-item {
+    display: block;
+  }
+
+  .clinic-info {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
 }
 </style>

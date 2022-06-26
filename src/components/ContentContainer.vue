@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-      <slot></slot>
+    <slot></slot>
   </div>
 </template>
 
@@ -12,6 +12,13 @@ export default {};
 @import "../scss/mixins.scss";
 @import "../scss/variables.scss";
 
+@media only screen and (min-width: 1180px) {
+  .content {
+    // padding: $pad;
+    width: 70rem;
+    margin: 0 auto;
+  }
+}
 .content {
   padding: $pad;
 }

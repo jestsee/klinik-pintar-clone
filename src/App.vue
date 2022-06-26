@@ -12,7 +12,7 @@
     :resetFilter="resetFilter"
   />
   <ContentContainer>
-    <div class="filter-button-container">
+    <!-- <div class="filter-button-container">
       <div class="selected-filter">
         <SubTitle :text="'Filter Klinik'" />
         <div class="selected-filter-item">
@@ -40,8 +40,14 @@
           :icon="true"
         />
       </div>
-    </div>
-    <div class="divider"></div>
+    </div> -->
+    <!-- <div class="divider"></div> -->
+    <FilterClinicContainer
+      :selectedPayments="selectedPayments"
+      :selectedServices="selectedServices"
+      :resetFilter="resetFilter"
+      :showFilterHandler="showFilterHandler"
+    />
     <GuideContainer />
     <ClinicContainer :totalClinics="clinics.total" :clinics="clinics.data" />
     <ClinicPagination
@@ -60,13 +66,14 @@ import NavBar from "./components/NavBar.vue";
 import FilterOption from "./components/SideBar.vue";
 import Const from "./const";
 import ContentContainer from "./components/ContentContainer.vue";
-import FilterButton from "./components/FilterButton.vue";
+// import FilterButton from "./components/FilterButton.vue";
 import GuideContainer from "./components/GuideContainer.vue";
 import ClinicContainer from "./components/ClinicContainer.vue";
 import ClinicPagination from "./components/ClinicPagination.vue";
-import SubTitle from "./components/SubTitle.vue";
-import WhiteButton from "./components/WhiteButton.vue";
-import UnderlinedButton from "./components/UnderlinedButton.vue";
+import FilterClinicContainer from "./components/FilterClinicContainer.vue";
+// import SubTitle from "./components/SubTitle.vue";
+// import WhiteButton from "./components/WhiteButton.vue";
+// import UnderlinedButton from "./components/UnderlinedButton.vue";
 
 export default {
   name: "App",
@@ -75,13 +82,11 @@ export default {
     BannerProv,
     FilterOption,
     ContentContainer,
-    FilterButton,
+    // FilterButton,
     GuideContainer,
     ClinicContainer,
     ClinicPagination,
-    SubTitle,
-    WhiteButton,
-    UnderlinedButton,
+    FilterClinicContainer,
   },
   data() {
     return {

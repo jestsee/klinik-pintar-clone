@@ -13,11 +13,33 @@
   />
   <ContentContainer>
     <div class="filter-button-container">
-      <FilterButton
-        :buttonHandler="() => showFilterHandler(true)"
-        :name="filterCounter"
-        :icon="true"
-      />
+      <div class="selected-filter">
+        <SubTitle :text="'Filter Klinik'" />
+        <div class="selected-filter-item">
+          <WhiteButton
+            v-for="(service, index) in selectedServices"
+            :key="index"
+            :text="service"
+          />
+          <WhiteButton
+            v-for="(service, index) in selectedPayments"
+            :key="index"
+            :text="service"
+          />
+          <UnderlinedButton
+            :name="'Hapus Filter'"
+            :orange="true"
+            :buttonHandler="resetFilter"
+          />
+        </div>
+      </div>
+      <div class="button-container">
+        <FilterButton
+          :buttonHandler="() => showFilterHandler(true)"
+          :name="filterCounter"
+          :icon="true"
+        />
+      </div>
     </div>
     <div class="divider"></div>
     <GuideContainer />
@@ -42,6 +64,9 @@ import FilterButton from "./components/FilterButton.vue";
 import GuideContainer from "./components/GuideContainer.vue";
 import ClinicContainer from "./components/ClinicContainer.vue";
 import ClinicPagination from "./components/ClinicPagination.vue";
+import SubTitle from "./components/SubTitle.vue";
+import WhiteButton from "./components/WhiteButton.vue";
+import UnderlinedButton from "./components/UnderlinedButton.vue";
 
 export default {
   name: "App",
@@ -54,6 +79,9 @@ export default {
     GuideContainer,
     ClinicContainer,
     ClinicPagination,
+    SubTitle,
+    WhiteButton,
+    UnderlinedButton,
   },
   data() {
     return {
@@ -93,7 +121,7 @@ export default {
       } else {
         this.selectedServices.splice(idx, 1);
       }
-      console.log(this.selectedServices);
+      // console.log(this.selectedServices);
     },
     setPayments(payment) {
       var idx = this.selectedPayments.indexOf(payment);
@@ -102,7 +130,7 @@ export default {
       } else {
         this.selectedPayments.splice(idx, 1);
       }
-      console.log(this.selectedPayments);
+      // console.log(this.selectedPayments);
     },
     resetFilter() {
       this.selectedServices = [];
@@ -171,13 +199,37 @@ export default {
   margin-top: 4.5rem;
 }
 
+.button-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+}
+
 .filter-button-container {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
   margin-top: 1.8rem;
   margin-bottom: 2.4rem;
 }
 
+.filter-button {
+  height: fit-content;
+  min-width: 170px;
+}
+
+.selected-filter {
+  width: 75%;
+  h3 {
+    margin-top: 0;
+  }
+}
+
 .divider {
   border-bottom: 1px solid gainsboro;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>

@@ -10,35 +10,25 @@
       <div class="services-containter">
         <h6>Pilih Layanan</h6>
         <div class="services-options">
-          <button
+          <WhiteButton
             v-for="service in services"
             :key="service.id"
-            @click="() => servicesHandler(service.name)"
-            v-bind:class="
-              selectedServices.includes(service.name)
-                ? 'service selected'
-                : 'service'
-            "
-          >
-            {{ service.name }}
-          </button>
+            :text="service.name"
+            :click="() => servicesHandler(service.name)"
+            :selected="selectedServices.includes(service.name)"
+          />
         </div>
       </div>
       <div class="payments-container">
         <h6>Pilih Pembayaran</h6>
         <div class="payment-options">
-          <button
+          <WhiteButton
             v-for="(payment, index) in payments"
             :key="index"
-            @click="() => paymentsHandler(payment.name)"
-            v-bind:class="
-              selectedPayments.includes(payment.name)
-                ? 'payment selected'
-                : 'payment'
-            "
-          >
-            {{ payment.name }}
-          </button>
+            :text="payment.name"
+            :click="() => paymentsHandler(payment.name)"
+            :selected="selectedPayments.includes(payment.name)"
+          />
         </div>
       </div>
       <div class="buttons-container-1">
@@ -68,6 +58,7 @@
 <script>
 import FilterButton from "./FilterButton.vue";
 import UnderlinedButton from "./UnderlinedButton.vue";
+import WhiteButton from "./WhiteButton.vue";
 export default {
   data() {
     return {
@@ -90,7 +81,7 @@ export default {
     paymentsHandler: Function,
     resetFilter: Function,
   },
-  components: { FilterButton, UnderlinedButton },
+  components: { FilterButton, UnderlinedButton, WhiteButton },
 };
 </script>
 
@@ -136,7 +127,7 @@ export default {
   }
 }
 .filter-container {
-  box-sizing:border-box; // make sure padding won't affect container size
+  box-sizing: border-box; // make sure padding won't affect container size
   padding: 1.5rem 2rem;
   z-index: 3;
   position: fixed;
@@ -173,33 +164,6 @@ h6 {
   font-size: 20pt;
   margin-top: 0.25rem;
   cursor: pointer;
-}
-
-.service,
-.payment {
-  background: #fff;
-  padding: 0.7rem 1rem;
-  border-radius: 20px;
-  border: 1px solid gainsboro;
-  font-size: 12pt;
-  margin-right: 0.65rem;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
-}
-
-.service:hover,
-.payment:hover {
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.selected {
-  background: rgba(30, 175, 225, 0.1);
-  color: $primary-blue;
-  font-weight: 700;
-}
-
-.selected:hover {
-  background: rgba(30, 175, 225, 0.1);
 }
 
 .buttons-container-1 {

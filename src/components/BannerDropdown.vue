@@ -64,7 +64,7 @@ export default {
 @import "../scss/variables.scss";
 .dropdown-container {
   padding: 0.3rem 0.7rem 0.3rem 1rem;
-  background: rgba(30, 175, 225, 0.1);
+  background: rgba(30, 175, 225, 0.12);
   color: $primary-blue;
   position: relative;
   height: auto;
@@ -119,8 +119,5 @@ export default {
       color: #fff;
     }
   }
-}
-.selected {
-  font-weight: 700;
 }
 </style>
